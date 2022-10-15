@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: database
+data:
+  database_host: c-c9qamuqkjufmgoqrcqub.rw.mdb.yandexcloud.net
+  database_port: "6432"
+  database_name: home
+  database_user: home-user

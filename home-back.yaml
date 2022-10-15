@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-back
+  labels:
+    app: home-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-back
+  template:
+    metadata:
+      labels:
+        app: home-back
+    spec:
+      containers:
+        - name: home-back
+          image: gelugu/home-back:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: database
+                  key: database_host
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: database
+                  key: database_port
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: database
+                  key: database_name
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: database
+                  key: database_user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: home
+                  key: database_password
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: home
+                  key: jwt_token
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-back
+spec:
+  type: ClusterIP
+  selector:
+    app: home-back
+  ports:
+  - port: 8080
+    targetPort: 8080
