@@ -11,6 +11,7 @@ metadata:
 spec:
   tls:
     - hosts:
+        - cache.gelugu.com
         - home.gelugu.com
         - api.home.gelugu.com
       secretName: dev-gelugu-tls
@@ -35,3 +36,13 @@ spec:
                 name: home-back
                 port:
                   number: 8080
+    - host: cache.gelugu.com
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: home-cache
+                port:
+                  number: 3000
