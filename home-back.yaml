@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: home-back
-          image: gelugu/home-back:0.0.1
+          image: gelugu/home-back:1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

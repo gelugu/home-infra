@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: home-front
-          image: gelugu/home-web:1.0.0
+          image: gelugu/home-web:1.1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -31,4 +31,4 @@ spec:
     app: home-front
   ports:
   - port: 80
-    targetPort: 3000
+    targetPort: 80
